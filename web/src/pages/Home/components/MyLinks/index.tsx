@@ -1,8 +1,9 @@
-import { Download, Loader2 } from "lucide-react";
+import { Download, Loader } from "lucide-react";
 import { Card } from "./components/Card";
 import { NoShortUrlFound } from "./components/NoShortUrlFound";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { services } from "../../services";
+import { LoadingItems } from "./components/LoadingItems";
 
 interface IShortUrlModel {
   shortUrl: string;
@@ -61,7 +62,7 @@ const MyLinks = ({ setRefreshMyLinks }: IMyLinksProps) => {
           disabled={isDownloadCsvButtonLoading}
         >
           {isDownloadCsvButtonLoading ? (
-            <Loader2 className='h-4 w-4 animate-spin text-[#4d505c]' />
+            <Loader className='h-4 w-4 animate-spin text-[#4d505c]' />
           ) : (
             <Download color='#4d505c' size={18} />
           )}
@@ -84,6 +85,8 @@ const MyLinks = ({ setRefreshMyLinks }: IMyLinksProps) => {
               />
             </div>
           ))
+        ) : isLoading ? (
+          <LoadingItems />
         ) : (
           <NoShortUrlFound />
         )}
