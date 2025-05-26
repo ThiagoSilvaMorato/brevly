@@ -11,7 +11,7 @@ export const createShortUrlRoute: FastifyPluginAsyncZod = async (server) => {
         summary: "Criar uma URL encurtada",
         tags: ["short-url"],
         body: z.object({
-          fullUrl: z.string().url(),
+          fullUrl: z.string(),
           shortUrl: z.string().min(1),
         }),
         response: {

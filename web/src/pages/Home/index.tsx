@@ -6,12 +6,14 @@ const Home = () => {
   const [refreshMyLinks, setRefreshMyLinks] = useState(false);
 
   return (
-    <div className='flex flex-col items-center justify-between h-screen bg-[#e4e6ec] py-[100px] px-[12%]'>
-      <div className='mb-8 w-full flex justify-start align-center'>
+    <div className='flex flex-col items-center justify-between h-screen bg-[#e4e6ec] py-[100px] px-[12%] max-[850px]:h-full max-[850px]:px-[16px]'>
+      <div className='mb-8 w-full flex justify-start items-center'>
         <img src='/logo.svg' alt='Logo' className='w-8 h-8' />
         <span className='text-[#2c46b1] font-semibold text-2xl ml-2'>brev.ly</span>
       </div>
-      <div className='flex flex-row *:justify-center items-start gap-3 w-full h-full'>
+
+      {/* Container principal responsivo */}
+      <div className='flex flex-row max-[850px]:flex-col max-[850px]:w-full justify-center items-start gap-3 w-full h-full'>
         <NewLink setRefreshMyLinks={setRefreshMyLinks} />
         <MyLinks key={refreshMyLinks.toString()} setRefreshMyLinks={setRefreshMyLinks} />
       </div>

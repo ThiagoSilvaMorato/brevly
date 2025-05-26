@@ -41,6 +41,12 @@ export async function getShortUrlByShortUrl(
   if (shortUrlByShortUrl.length === 0) {
     return makeLeft("URL encurtada não existe.");
   }
+  await db
+    .update(schema.shortUrls)
+    .set({
+      accessCount: shortUrlByShortUrl[0].accessCount + 1,
+    })
+    .where(ilike(schema.shortUrls.shortUrl, shortUrl));
 
   return makeRight({ shortUrl: shortUrlByShortUrl[0] });
 }

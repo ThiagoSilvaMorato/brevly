@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { services } from "./services";
@@ -6,16 +7,18 @@ const Redirecting = () => {
   const navigate = useNavigate();
 
   const pathname = useLocation().pathname;
+  const shortUrl = pathname.split("/")[1];
 
   useEffect(() => {
-    const shortUrl = pathname.split("/")[1];
     services
       .getShortUrlByShortUrl(shortUrl)
-      .then((response) => (window.location.href = response.data.shortUrl.fullUrl))
+      .then((response) => {
+        window.location.href = response.data.shortUrl.fullUrl;
+      })
       .catch(() => {
         navigate("/url/not-found");
       });
-  }, [pathname, navigate]);
+  }, []);
 
   return (
     <div className='flex items-center justify-between h-screen w-full bg-[#e4e6ec] py-[100px] px-[12%]'>

@@ -18,7 +18,7 @@ export const services = {
     return api.delete(`/short-url/${shortUrl}`);
   },
 
-  increaseShortUrlAccessCount: async (shortUrl: string) => {
-    return api.patch(`/short-url/${shortUrl}`);
+  getDownloadCsbUrl: async () => {
+    return api.get("short-url/export-csv");
   },
 };

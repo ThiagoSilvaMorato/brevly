@@ -5,7 +5,7 @@ import { ilike } from "drizzle-orm";
 import { z } from "zod";
 
 const postShortUrlInput = z.object({
-  fullUrl: z.string().url(),
+  fullUrl: z.string(),
   shortUrl: z.string().min(1),
 });
 
@@ -33,6 +33,12 @@ export async function postShortUrl(input: PostShortUrlInput) {
 
   if (shortUrl.includes("--")) {
     validationErrors.push("Não pode ter hífens consecutivos");
+  }
+
+  try {
+    new URL(fullUrl);
+  } catch {
+    validationErrors.push("Por favor, insira uma URL válida (ex: https://exemplo.com)");
   }
 
   if (validationErrors.length > 0) {

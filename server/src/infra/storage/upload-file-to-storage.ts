@@ -29,8 +29,6 @@ export async function uploadFileToStorage(input: UploadFileToStorageInput) {
 
   await upload.done();
 
-  console.log(env.CLOUDFLARE_PUBLIC_URL);
-
   return {
     key: uniqueFileName,
     url: new URL(uniqueFileName, env.CLOUDFLARE_PUBLIC_URL).toString(),

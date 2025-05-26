@@ -18,22 +18,20 @@ const NewLink = ({ setRefreshMyLinks }: INewLinkProps) => {
         fullUrl,
         shortUrl,
       })
-      .then((response) => {
-        console.log({ response });
+      .then(() => {
         setIsLoading(false);
-        // setFullUrl("");
-        // setShortUrl("");
         setRefreshMyLinks((prev) => !prev);
+        setFullUrl("");
+        setShortUrl("");
       })
       .catch((error) => {
-        console.log({ error: error.response.data.message });
         toastMessages.error("Erro ao salvar o link", error.response.data.message);
         setIsLoading(false);
       });
   };
 
   return (
-    <div className='flex flex-col gap-4 bg-white rounded-xl w-[40%] p-8'>
+    <div className='flex flex-col gap-4 bg-white rounded-xl w-[40%] p-8 max-[850px]:w-full'>
       <h2 className='text-2xl font-semibold mb-4'>Novo Link</h2>
       <label htmlFor='original-link' className='text-[#4d505c] text-xsm -mb-2'>
         LINK ORIGINAL
@@ -42,6 +40,7 @@ const NewLink = ({ setRefreshMyLinks }: INewLinkProps) => {
         id='original-link'
         type='text'
         placeholder='www.exemplo.com.br'
+        value={fullUrl}
         onChange={(e) => setFullUrl(e.target.value)}
         className='border border-gray-300 rounded-lg p-2 h-[60px]'
       />
